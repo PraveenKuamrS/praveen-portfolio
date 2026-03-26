@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praveen Kumar · Full Stack & Mobile App Developer</title>
+    <meta name="description" content="Experienced Flutter & Full Stack Developer specializing in cross-platform mobile apps, web applications, and scalable backend solutions. Expert in payment integrations, real-time systems, and modern tech stack.">
+    <meta name="keywords" content="Flutter Developer, Full Stack Developer, Mobile App Developer, MEVN Stack, React, Vue.js, Node.js, MongoDB, Payment Integration, Razorpay, Stripe, Web Development">
+    <meta name="author" content="Praveen Kumar Sakthivel">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Praveen Kumar · Full Stack & Mobile App Developer">
+    <meta property="og:description" content="Building scalable apps and solving real-world problems with Flutter, React, Vue.js, and Node.js">
+    <meta property="og:image" content="https://praveenkuamrs.github.io/praveen-portfolio/images/pknew.png">
+    <meta property="og:url" content="https://praveenkuamrs.github.io/praveen-portfolio/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Praveen Kumar · Full Stack & Mobile App Developer">
+    <meta name="twitter:description" content="Building scalable apps and solving real-world problems">
+    <meta name="twitter:image" content="https://praveenkuamrs.github.io/praveen-portfolio/images/pknew.png">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/pklogo.png">
     <!-- Modern minimalist font -->
@@ -20,16 +37,42 @@
 
 <body>
 
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo"><img src="assets/pklogo.png" alt="Praveen Kumar"></a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#process">Process</a>
-                <a href="#work">Work</a>
-                <a href="#contact" class="nav-cta">Hire Me</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#process">Process</a>
+                    <a href="#work">Work</a>
+                    <a href="#contact" class="nav-cta">Hire Me</a>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Backdrop -->
+        <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <a href="#about" class="mobile-link">About</a>
+                <a href="#services" class="mobile-link">Services</a>
+                <a href="#process" class="mobile-link">Process</a>
+                <a href="#work" class="mobile-link">Work</a>
+                <a href="#contact" class="mobile-link">Hire Me</a>
             </div>
         </div>
     </nav>
@@ -38,7 +81,7 @@
     <section class="hero" id="home">
         <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Praveen kumar Sakthivel</h1>
+                <h1 class="hero-title">Praveen Kumar Sakthivel</h1>
                 <h2 class="hero-typing">I am a <span class="typed-text"></span><span class="cursor">&nbsp;</span></h2>
                 <div class="hero-subtitle">
                     <p>Turning abstract ideas into elegant, high-performance, and production-ready digital solutions.</p>
@@ -235,7 +278,14 @@
                         </div>
                         <span class="read-more">Click to read full details &rarr;</span>
                     </div>
-                    <div class="work-carousel">
+                    <div class="work-carousel" data-project="promailnet">
+                        <button class="carousel-btn prev" onclick="event.stopPropagation(); changeSlide('promailnet', -1)" aria-label="Previous image">
+                            <i data-lucide="chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next" onclick="event.stopPropagation(); changeSlide('promailnet', 1)" aria-label="Next image">
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                        <div class="carousel-dots"></div>
                         <img src="assets/promailnet/Screenshot_2026-03-17-11-30-51-840_com.cygnusa.promailnet.jpg"
                             class="carousel-img active" alt="Promailnet screenshot 1">
                         <img src="assets/promailnet/Screenshot_2026-03-17-11-31-06-807_com.cygnusa.promailnet.jpg"
@@ -268,7 +318,14 @@
                         </div>
                         <span class="read-more">Click to read full details &rarr;</span>
                     </div>
-                    <div class="work-carousel">
+                    <div class="work-carousel" data-project="smarttrack">
+                        <button class="carousel-btn prev" onclick="event.stopPropagation(); changeSlide('smarttrack', -1)" aria-label="Previous image">
+                            <i data-lucide="chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next" onclick="event.stopPropagation(); changeSlide('smarttrack', 1)" aria-label="Next image">
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                        <div class="carousel-dots"></div>
                         <img src="assets/smarttrack/smarttrack.png" class="carousel-img active"
                             alt="Smarttrack screenshot">
                         <img src="assets/smarttrack/smarttrack1.png" class="carousel-img" alt="Smarttrack screenshot 1">
@@ -339,7 +396,7 @@
     </section>
 
     <!-- Reviews / Tech Stack Section (Dark Mode Block) -->
-    <section class="reviews" style="overflow-x: hidden; background: #ffffff;">
+    <section class="reviews">
         <div class="container">
             <h2 class="section-title">Technologies I Command</h2>
             <p class="section-subtitle">A modern, full-stack foundation built for scale.</p>
@@ -484,14 +541,14 @@
 
             <div class="contact-wrapper">
                 <div class="contact-links">
-                    <a href="mailto:praveenkuamrvpgs13@gmail.com" class="contact-link">
+                    <a href="mailto:praveenkumarvpgs13@gmail.com" class="contact-link">
                         <div class="contact-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512" fill="currentColor">
                                 <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
                             </svg>
                         </div>
                         <div class="contact-text">
-                            <strong>praveenkuamrvpgs13@gmail.com</strong>
+                            <strong>praveenkumarvpgs13@gmail.com</strong>
                             <span>Email · Fastest response</span>
                         </div>
                     </a>
@@ -580,7 +637,16 @@
                                     required></textarea>
                             </div>
 
-                            <button type="submit" id="submit-btn" class="btn btn-primary btn-block btn-lg">Send Project Brief &rarr;</button>
+                            <button type="submit" id="submit-btn" class="btn btn-primary btn-block btn-lg">
+                                <span class="btn-text">Send Project Brief &rarr;</span>
+                                <span class="btn-loader" style="display: none;">
+                                    <svg class="spinner" viewBox="0 0 50 50">
+                                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                                    </svg>
+                                    Sending...
+                                </span>
+                            </button>
+                            <div id="form-message" class="form-message" style="display: none;"></div>
                             <p class="form-footer"><i data-lucide="lock" width="14" height="14"></i> No commitment ·
                                 Free consultation · Reply within 24h</p>
                         </form>
@@ -596,10 +662,7 @@
             <div class="footer-left">
                 <p>&copy; 2026 Praveen Kumar Sakthivel. All rights reserved.</p>
             </div>
-            <div class="footer-right">
-                <a href="https://wa.link/py2yc1" target="_blank">WhatsApp</a>
-                <a href="../pkdev/assets/img/PK-Resume.pdf" download>Download Resume</a>
-            </div>
+           
         </div>
     </footer>
 
@@ -624,7 +687,7 @@
                     d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
         </a>
-        <a href="mailto:praveenkuamrvpgs13@gmail.com" class="social-icon mail" title="Email">
+        <a href="mailto:praveenkumarvpgs13@gmail.com" class="social-icon mail" title="Email">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
                 <path
                     d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
@@ -833,6 +896,37 @@
 
     <script>
         lucide.createIcons();
+        
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Re-initialize icons after modal opens
+        const modalObserver = new MutationObserver(function() {
+            lucide.createIcons();
+        });
+        const modalBody = document.getElementById('modalBody');
+        if (modalBody) {
+            modalObserver.observe(modalBody, { childList: true });
+        }
     </script>
     <script src="contact.js"></script>
 </body>
