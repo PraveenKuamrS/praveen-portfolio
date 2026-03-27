@@ -47,20 +47,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentTheme = localStorage.getItem('theme') || 'light';
     htmlElement.setAttribute('data-theme', currentTheme);
 
+    // Update icon based on current theme
+    const updateThemeIcon = (theme) => {
+        const icon = themeToggle.querySelector('.theme-icon');
+        if (icon) {
+            icon.setAttribute('data-lucide', theme === 'light' ? 'sun' : 'moon');
+            lucide.createIcons();
+        }
+    };
+
+    // Initialize icon
+    updateThemeIcon(currentTheme);
+
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
             const theme = htmlElement.getAttribute('data-theme');
             const newTheme = theme === 'light' ? 'dark' : 'light';
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
         });
     }
 
-    // ========== Scroll Animations ==========
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // ========== FAQ Toggle Icon Logic ==========
+    const faqCards = document.querySelectorAll('.faq-card');
+    faqCards.forEach(faqCard => {
+        const summary = faqCard.querySelector('summary');
+        const icon = faqCard.querySelector('.faq-icon i');
+        
+        summary.addEventListener('click', function(e) {
+            // Toggle happens after click, so we check current state
+            setTimeout(() => {
+                if (faqCard.hasAttribute('open')) {
+                    icon.setAttribute('data-lucide', 'chevron-up');
+                } else {
+                    icon.setAttribute('data-lucide', 'chevron-down');
+                }
+                lucide.createIcons();
+            }, 10);
+        });
+    });
 
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
@@ -68,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 entry.target.classList.add('visible');
             }
         });
-    }, observerOptions);
+    });
 
     // Add fade-in class to elements
     const animateElements = document.querySelectorAll('.service-card-modern, .work-card, .timeline-step, .faq-card, .contact-link');
@@ -156,6 +182,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // ========== EmailJS Configuration ==========
+    // Initialize EmailJS with your Public Key
+    emailjs.init('tPUcRht6QFPc667BI'); // Replace with your EmailJS public key
+
     // ========== Contact Form with Enhanced UX ==========
     const contactForm = document.getElementById('project-contact-form');
     if (!contactForm) return;
@@ -181,41 +211,34 @@ document.addEventListener("DOMContentLoaded", function () {
         const timeline = document.getElementById('contact-timeline').value;
         const details = document.getElementById('contact-details').value;
 
+        // Template parameters matching your EmailJS template
+        const templateParams = {
+            name: name,
+            email: email,
+            app_type: appType,
+            budget: budget,
+            timeline: timeline,
+            details: details
+        };
+
         try {
-            const response = await fetch('https://formsubmit.co/ajax/praveenkuamrvpgs13@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    _subject: `[Portfolio Lead] New ${appType} Request`,
-                    _replyto: email,
-                    Name: name,
-                    Email: email,
-                    AppType: appType,
-                    Budget: budget,
-                    Timeline: timeline,
-                    ProjectDetails: details
-                })
-            });
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                'service_lch6kza',  // Replace with your EmailJS Service ID
+                'template_4dr8xtw', // Replace with your EmailJS Template ID
+                templateParams
+            );
 
-            const result = await response.json();
-
-            if (result.success === "true" || result.success === true) {
+            if (response.status === 200) {
                 formMessage.textContent = "✓ Message sent successfully! I'll reach out within 24 hours.";
                 formMessage.className = 'form-message success';
                 formMessage.style.display = 'block';
                 contactForm.reset();
-            } else if (result.message && result.message.includes("Activation")) {
-                formMessage.textContent = "⚠ Please check your email to activate the form, then try again.";
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
             } else {
-                throw new Error(result.message || "Failed to send");
+                throw new Error('Failed to send');
             }
         } catch (error) {
-            console.error(error);
+            console.error('EmailJS Error:', error);
             formMessage.textContent = "✗ Error sending message. Please email me directly at praveenkuamrvpgs13@gmail.com";
             formMessage.className = 'form-message error';
             formMessage.style.display = 'block';
